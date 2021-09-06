@@ -9,7 +9,7 @@ function BadgeHome() {
   return (
     <div className="Home">
       <dir className="col-text">
-        <img src={logo} alt="Platzi conf logo" />
+        <img src={logo} alt="PlatziConfLogo" />
         <p>
           <h1>BADGE MANAGEMENT SYSTEM</h1>
           <Link className="btn btn-primary" to="/badges">
