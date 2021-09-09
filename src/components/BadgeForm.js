@@ -83,7 +83,7 @@ class BadgeForm extends React.Component {
             <label>Twiter</label>
             <input
               onChange={this.props.onChange}
-              className="form-control"
+              className="form-control  mb-4"
               type="text"
               name="twitter"
               placeholder="Introduce tu usuario de twitter"
