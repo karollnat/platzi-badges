@@ -6,77 +6,52 @@ import "./styles/Badges.css";
 import confLogo from "../images/badge-header.svg";
 import BadgesList from "../components/BadgesList";
 
-class Banges extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("1. constructor()");
+import api from "../api";
+import PageLoading from "../components/PageLoading";
+import PageError from "../components/PageError";
+import MiniLoader from "../components/MiniLoader";
 
-    this.state = {
-      data: [],
-    };
-  }
+class Banges extends React.Component {
+  state = {
+    loading: true,
+    error: null,
+    data: undefined,
+  };
 
   componentDidMount() {
-    console.log("3.componentDidMount()");
+    this.fetchData();
 
-    this.timeoutId = setTimeout(() => {
-      this.setState({
-        data: [
-          {
-            id: "2de30c42-9deb-40fc-a41f-05e62b5939a7",
-            irstName: "Freda",
-            lastName: "Grady",
-            email: "Leann_Berge@gmail.com",
-            jobTitle: "  Legacy Brand Director",
-            twitter: "@FredaGrady22221-7573",
-            avatarUrl:
-              "https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon",
-          },
-          {
-            id: "d00d3614-101a-44ca-b6c2-0be075aeed3d",
-            firstName: "Major",
-            lastName: "Rodriguez",
-            email: "Ilene66@hotmail.com",
-            jobTitle: "Human Research Architect",
-            twitter: "@ajorRodriguez61545",
-            avatarUrl:
-              "https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon",
-          },
-          {
-            id: "63c03386-33a2-4512-9ac1-354ad7bec5e9",
-            firstName: "Daphney",
-            lastName: "Torphy",
-            email: "Ron61@hotmail.com",
-            jobTitle: "National Markets Officer",
-            twitter: "@DaphneyTorphy96105",
-            avatarUrl:
-              "https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon",
-          },
-        ],
-      });
-    }, 3000); //Función asincrona-- para dar un resultado en un tiempo determinado
+    //Polling- Actualizar automatica/ datos en un intervalo de tiempo hasta que el usuario sale de la pagina
+    this.intervalId = setInterval(this.fetchData, 5000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("5. componentDidUpdate ()");
-    console.log({
-      prevProps: prevProps,
-      prevState: prevState,
-    });
-
-    console.log({
-      props: this.props,
-      state: this.state,
-    });
-  }
-
+  //cancelar el intervalo
   componentWillUnmount() {
-    console.log("6. componentWillUnmount");
-    clearTimeout(this.timeoutId); //la cual recibe un ID si exite ese trabajo y esta pendiente lo cancela
+    clearInterval(this.intervalId);
   }
+
+  fetchData = async () => {
+    this.setState({ loading: true, error: null });
+
+    try {
+      const data = await api.badges.list();
+      this.setState({ loading: false, data: data });
+    } catch (error) {
+      this.setState({ loading: false, error: error });
+    }
+  };
 
   render() {
-    console.log("2/4. Reder()");
+    if (this.state.loading === true && !this.state.data) {
+      return <PageLoading />;
+    }
+
+    if (this.state.error) {
+      //error controlado para ver funcionalidad delmcliclo de vida componente
+      //return `Error: ${this.state.error.message}`;
+      return <PageError error={this.state.error} />;
+    }
+
     return (
       <React.Fragment>
         <div className="Badges">
@@ -98,9 +73,8 @@ class Banges extends React.Component {
             </Link>
           </div>
           <BadgesList badges={this.state.data} />
-          <div className="Badges__list">
-            <div className="Badges__container"></div>
-          </div>
+
+          {this.state.loading && <MiniLoader />}
         </div>
       </React.Fragment>
     );

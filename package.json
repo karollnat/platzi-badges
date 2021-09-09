@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "bootstrap": "^5.1.0",
+    "md5": "^2.3.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-router-dom": "^5.2.1",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "faker": "^4.1.0",

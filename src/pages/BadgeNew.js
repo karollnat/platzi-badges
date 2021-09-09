@@ -1,12 +1,14 @@
 import React from "react";
 
-import header from "../images/badge-header.svg";
-
+import header from "../images/platziconf-logo.svg";
 import "./styles/BadgeNew.css";
-
 import Badge from "../components/Badge";
 //import Navbar from '../components/Navbar';
 import BadgeForm from "../components/BadgeForm";
+import api from "../api";
+import Gravatar from "../components/Gravatar";
+import md5 from "md5";
+import PageLoading from "../components/PageLoading";
 
 class BadgeNew extends React.Component {
   // state = { form:{} }; //inicialemos un estado vacio con una propiedad FORM qu esta vacio
@@ -20,6 +22,8 @@ class BadgeNew extends React.Component {
   //     });
   // };
   state = {
+    loading: false,
+    error: null,
     form: {
       firstName: "",
       lastName: "",
@@ -37,29 +41,56 @@ class BadgeNew extends React.Component {
       },
     });
   };
+
+  //Captura el evento del envio de datos
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    this.setState({ loading: true, error: null });
+    this.state.form.avatarUrl = `https://es.gravatar.com/avatar/${md5(
+      this.state.form.email
+    )}?d=identicon`;
+    try {
+      await api.badges.create(this.state.form);
+      this.setState({ loading: false });
+      this.props.history.push("/badges");
+    } catch (error) {
+      this.setState({ loading: false, error: error });
+    }
+  };
+
   render() {
+    if (this.state.loading) {
+      return <PageLoading />;
+    }
     return (
       <React.Fragment>
         <div className="BadgeNew__hero">
-          <img className="img-fluid" src={header} alt="Logo" />
+          <img
+            className="BadgeNew__hero-image img-fluid"
+            src={header}
+            alt="Logo"
+          />
         </div>
 
         <div className="container">
           <div className="row">
             <div className="col-6">
               <Badge
-                firstName={this.state.form.firstName}
-                lastName={this.state.form.lastName}
-                twitter={this.state.form.twitter}
-                jobTitle={this.state.form.jobTitle}
-                email={this.state.form.email}
+                firstName={this.state.form.firstName || "FIRST_NAME"}
+                lastName={this.state.form.lastName || "LAST_NAME"}
+                twitter={this.state.form.twitter || "twitter"}
+                jobTitle={this.state.form.jobTitle || "JOB_TITLE"}
+                email={this.state.form.email || "EMAIL"}
                 avatarUrl="https://s.gravatar.com/avatar/5d038130bf2d14b6df29a7a3a2d77275?s=80"
               />
             </div>
             <div className="col-6">
+              <h1>New Attendant</h1>
               <BadgeForm
                 onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
                 formValues={this.state.form}
+                error={this.state.error}
               />
             </div>
           </div>
