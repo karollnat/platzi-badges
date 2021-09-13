@@ -1,15 +1,6 @@
 {
   "badges": [
     {
-      "id": "2de30c42-9deb-40fc-a41f-05e62b5939a7",
-      "firstName": "Freda",
-      "lastName": "Grady",
-      "email": "Leann_Berge@gmail.com",
-      "jobTitle": "Legacy Brand Director",
-      "twitter": "FredaGrady22221-7573",
-      "avatarUrl": "https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon"
-    },
-    {
       "id": "d00d3614-101a-44ca-b6c2-0be075aeed3d",
       "firstName": "Major",
       "lastName": "Rodriguez",
@@ -451,40 +442,13 @@
       "avatarUrl": "https://es.gravatar.com/avatar/1cc734c645aed26723499503826899e0?d=identicon"
     },
     {
-      "firstName": "Juan",
+      "firstName": "Juan Carlos",
       "lastName": "Gutierrez",
-      "email": "juancho@gmail.com",
+      "email": "juancar@gmail.com",
       "jobTitle": "Back-End",
-      "twitter": "juancho",
+      "twitter": "juanchocar",
       "id": "rxH4OSg",
-      "avatarUrl": "https://es.gravatar.com/avatar/b601e4d4bd50590e2b0613b15bc87ec2?d=identicon"
-    },
-    {
-      "firstName": "Juan",
-      "lastName": "Gutierrez",
-      "email": "juancho@gmail.com",
-      "jobTitle": "Back-End",
-      "twitter": "juancho",
-      "id": "Allnibb",
-      "avatarUrl": "https://es.gravatar.com/avatar/b601e4d4bd50590e2b0613b15bc87ec2?d=identicon"
-    },
-    {
-      "firstName": "Juan",
-      "lastName": "Gutierrez",
-      "email": "juancho@gmail.com",
-      "jobTitle": "Back-End",
-      "twitter": "juancho",
-      "id": "kCswfpF",
-      "avatarUrl": "https://es.gravatar.com/avatar/b601e4d4bd50590e2b0613b15bc87ec2?d=identicon"
-    },
-    {
-      "firstName": "Juan",
-      "lastName": "Gutierrez",
-      "email": "juancho@gmail.com",
-      "jobTitle": "Back-End",
-      "twitter": "juancho",
-      "id": "EY2acT5",
-      "avatarUrl": "https://es.gravatar.com/avatar/b601e4d4bd50590e2b0613b15bc87ec2?d=identicon"
+      "avatarUrl": "https://es.gravatar.com/avatar/c2f7e907fa4ad88b995fe958b4a8b290?d=identicon"
     },
     {
       "firstName": "Xiomara",
